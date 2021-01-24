@@ -1,6 +1,6 @@
 import React from "react";
 const App = () => {
-  return <></>;
+  return <>Riski -- Risk Assessment</>;
 };
 
 export default App;
