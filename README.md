@@ -1,4 +1,4 @@
-# Riski Client
+# RiskEase Client
 
 - `npm install`
 - `npm start`
