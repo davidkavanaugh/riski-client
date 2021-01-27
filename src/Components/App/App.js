@@ -7,7 +7,7 @@ const App = () => {
   return (
     <>
       <Router>
-        <New path="/new" />
+        <New path="/new" default />
         <Search path="/search" />
         <Settings path="/settings" />
       </Router>
