@@ -1,0 +1,22 @@
+.actions {
+  display: flex;
+  margin-top: -3px;
+}
+.btnSpacer {
+  width: 15px;
+}
+
+.li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.wrapper {
+  padding-right: 0px;
+  padding-left: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}

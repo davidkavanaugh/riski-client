@@ -18,7 +18,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import SettingsIcon from "@material-ui/icons/Settings";
 import SearchIcon from "@material-ui/icons/Search";
 import AddBoxIcon from "@material-ui/icons/AddBox";
-import App from "./App";
+import App from "../App/App";
 
 import { navigate } from "@reach/router";
 

@@ -8,7 +8,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { Button, Typography, TextField } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import Survey from "./Survey";
+import Survey from "../Survey/Survey";
 
 const Accordion = withStyles({
   root: {

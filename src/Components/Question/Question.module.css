@@ -1,0 +1,40 @@
+.actions {
+  display: flex;
+  margin-top: -3px;
+}
+.btnSpacer {
+  width: 15px;
+}
+.btn {
+  margin-left: 5px;
+  height: 40px;
+}
+.formGroup {
+  display: flex;
+  margin: 10px 0px;
+  width: 100%;
+}
+.formWrapper {
+  width: 100%;
+}
+.li {
+  font-size: 17px;
+}
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.queryHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.img {
+  border-radius: 15px;
+  max-width: 100%;
+  height: auto;
+  margin: 10px 0px;
+}

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Sidenav from "./Sidenav";
+import Sidenav from "./Components/Sidenav/Sidenav";
 import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@material-ui/core/styles";
 import { createMuiTheme } from "@material-ui/core/styles";
@@ -16,9 +16,16 @@ const theme = createMuiTheme({
       main: "#795548",
     },
     text: {
-      primary: "#000000",
+      main: "#000000",
       secondary: "#C4C4C4",
       light: "#FFFFFF",
+    },
+    error: {
+      main: "#E60000",
+    },
+    danger: {
+      main: "#E60000",
+      dark: "#B30000",
     },
   },
 });
