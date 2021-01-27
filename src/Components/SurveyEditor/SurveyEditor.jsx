@@ -6,7 +6,7 @@ import {
 } from "../../reducers/SurveyReducer";
 import Question from "../Question/Question";
 import NewQuestion from "../Question/NewQuestion";
-import css from "./Survey.module.css";
+import css from "./SurveyEditor.module.css";
 
 const Survey = (props) => {
   const [state, dispatch] = useReducer(surveyReducer, surveyInitialState);
