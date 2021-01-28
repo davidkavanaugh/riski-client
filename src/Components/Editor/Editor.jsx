@@ -1,18 +1,18 @@
 import React, { useReducer } from "react";
-import { SurveyContext } from "../../Context";
+import { EditorContext } from "../../context";
 import {
-  surveyReducer,
-  surveyInitialState,
-} from "../../reducers/SurveyReducer";
-import Question from "../Question/Question";
-import NewQuestion from "../Question/NewQuestion";
-import css from "./SurveyEditor.module.css";
+  editorReducer,
+  editorInitialState,
+} from "../../reducers/Editor.reducer";
+import Question from "./Question/Question";
+import NewQuestion from "./Question/NewQuestion";
+import css from "./Editor.module.css";
 
-const Survey = (props) => {
-  const [state, dispatch] = useReducer(surveyReducer, surveyInitialState);
+const Editor = (props) => {
+  const [state, dispatch] = useReducer(editorReducer, editorInitialState);
 
   return (
-    <SurveyContext.Provider value={{ state, dispatch }}>
+    <EditorContext.Provider value={{ state, dispatch }}>
       <div className={css.formWrapper}>
         {/* CURRENT QUESTIONS */}
         <ol>
@@ -31,8 +31,8 @@ const Survey = (props) => {
         </ol>
         <NewQuestion />
       </div>
-    </SurveyContext.Provider>
+    </EditorContext.Provider>
   );
 };
 
-export default Survey;
+export default Editor;

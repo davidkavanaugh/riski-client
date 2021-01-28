@@ -3,20 +3,20 @@ import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
-import { SurveyContext } from "../../Context";
+import { EditorContext } from "../../../context";
 import { Button, TextField } from "@material-ui/core";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import BlockIcon from "@material-ui/icons/Block";
 import css from "./EditQuestion.module.css";
-import styles from "../../styles/editQuestion.styles";
+import styles from "../../../styles/editQuestion.styles";
 
 const useStyles = makeStyles((theme) => styles(theme));
 
 const EditQuestion = (props) => {
   const classes = useStyles();
   const { idx, open, closeModal } = props;
-  const { state, dispatch } = useContext(SurveyContext);
+  const { state, dispatch } = useContext(EditorContext);
 
   const reducer = (state, action) => {
     return {
@@ -52,7 +52,6 @@ const EditQuestion = (props) => {
     setQuestionState({ type: "question", payload: value });
   };
   const handleImgSelect = (e) => {
-    console.log("hit");
     e.preventDefault();
     var reader = new FileReader();
     var file = e.target.files[0];

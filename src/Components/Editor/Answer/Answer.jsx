@@ -1,18 +1,18 @@
 import React, { useContext, useReducer } from "react";
-import { SurveyContext } from "../../Context";
+import { EditorContext } from "../../../context";
 import { makeStyles } from "@material-ui/core/styles";
 import ClearIcon from "@material-ui/icons/Clear";
 import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import IconButton from "@material-ui/core/IconButton";
 import EditAnswer from "./EditAnswer";
 import css from "./Answer.module.css";
-import styles from "../../styles/answer.styles";
+import styles from "../../../styles/answer.styles";
 
 const Answer = (props) => {
   const useStyles = makeStyles((theme) => styles(theme));
   const classes = useStyles();
   const { answerIdx, questionIdx, answers, text, points } = props;
-  const { dispatch } = useContext(SurveyContext);
+  const { dispatch } = useContext(EditorContext);
   const reducer = (state, action) => {
     return {
       ...state,

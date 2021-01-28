@@ -1,16 +1,16 @@
-import React, { useContext, useReducer, useEffect } from "react";
-import { SurveyContext } from "../../Context";
+import React, { useContext, useReducer } from "react";
+import { EditorContext } from "../../../context";
 import { Button, TextField } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import BlockIcon from "@material-ui/icons/Block";
 import { makeStyles } from "@material-ui/core/styles";
-import styles from "../../styles/newQuestion.styles";
+import styles from "../../../styles/newQuestion.styles";
 import css from "./NewQuestion.module.css";
 const QuestionForm = (props) => {
   const useStyles = makeStyles((theme) => styles(theme));
   const classes = useStyles();
-  const { state, dispatch } = useContext(SurveyContext);
+  const { dispatch } = useContext(EditorContext);
   const reducer = (state, action) => {
     return {
       ...state,

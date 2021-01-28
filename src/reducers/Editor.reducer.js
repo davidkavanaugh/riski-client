@@ -1,8 +1,8 @@
-export const surveyInitialState = {
+export const editorInitialState = {
   questions: [],
 };
 
-export const surveyReducer = (state, action) => {
+export const editorReducer = (state, action) => {
   switch (action.type) {
     case "addAnswer":
       let questionsCopyAddAnswer = [...state.questions];

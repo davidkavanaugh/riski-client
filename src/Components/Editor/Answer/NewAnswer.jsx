@@ -1,16 +1,16 @@
 import React, { useReducer, useContext } from "react";
-import { SurveyContext } from "../../Context";
+import { EditorContext } from "../../../context";
 import { makeStyles } from "@material-ui/core/styles";
 import { Button, TextField } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
-import styles from "../../styles/newAnswer.styles";
+import styles from "../../../styles/newAnswer.styles";
 import css from "./NewAnswer.module.css";
 
 const NewAnswer = (props) => {
   const useStyles = makeStyles((theme) => styles(theme));
   const classes = useStyles();
   const { idx } = props;
-  const { dispatch } = useContext(SurveyContext);
+  const { dispatch } = useContext(EditorContext);
   const reducer = (state, action) => {
     return {
       ...state,

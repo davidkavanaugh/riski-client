@@ -1,19 +1,19 @@
 import React, { useEffect, useReducer, useContext } from "react";
-import { SurveyContext } from "../../Context";
+import { EditorContext } from "../../../context";
 import { makeStyles } from "@material-ui/core/styles";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
 import { Button, TextField } from "@material-ui/core";
 import css from "./EditAnswer.module.css";
-import styles from "../../styles/editAnswer.styles.js";
+import styles from "../../../styles/editAnswer.styles.js";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 const EditAnswer = (props) => {
   const { open, closeModal, questionIdx, answerIdx, answers } = props;
   const useStyles = makeStyles((theme) => styles(theme));
   const classes = useStyles();
-  const { dispatch } = useContext(SurveyContext);
+  const { dispatch } = useContext(EditorContext);
 
   const reducer = (state, action) => {
     return {

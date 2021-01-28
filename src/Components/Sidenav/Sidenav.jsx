@@ -19,6 +19,8 @@ import SettingsIcon from "@material-ui/icons/Settings";
 import SearchIcon from "@material-ui/icons/Search";
 import AddBoxIcon from "@material-ui/icons/AddBox";
 import App from "../App/App";
+import Alert from "./Alert";
+import cookie from "js-cookie";
 
 import { navigate } from "@reach/router";
 
@@ -96,6 +98,7 @@ export default function Sidenav() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [modalOpen, setModalOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -103,6 +106,13 @@ export default function Sidenav() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handleNew = () => {
+    navigate("/new");
+    if (cookie.get("survey")) {
+      setModalOpen(true);
+    }
   };
 
   return (
@@ -154,7 +164,7 @@ export default function Sidenav() {
         </div>
         <Divider />
         <List>
-          <ListItem button key={"New"} onClick={() => navigate("/new")}>
+          <ListItem button key={"New"} onClick={handleNew}>
             <ListItemIcon>
               <AddBoxIcon />
             </ListItemIcon>
@@ -185,6 +195,7 @@ export default function Sidenav() {
         <div className={classes.toolbar} />
         <App />
       </main>
+      <Alert open={modalOpen} setOpen={setModalOpen} />
     </div>
   );
 }

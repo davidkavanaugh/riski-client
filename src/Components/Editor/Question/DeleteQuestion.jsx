@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { SurveyContext } from "../../Context";
+import { EditorContext } from "../../../context";
 import Modal from "@material-ui/core/Modal";
 import Backdrop from "@material-ui/core/Backdrop";
 import Fade from "@material-ui/core/Fade";
@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 const DeleteQuestion = (props) => {
   const classes = useStyles();
   const { open, handleClose, idx } = props;
-  const { dispatch } = useContext(SurveyContext);
+  const { dispatch } = useContext(EditorContext);
   const handleDelete = (idx) => {
     dispatch({
       type: "deleteQuestion",

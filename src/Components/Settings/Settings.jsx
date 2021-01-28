@@ -8,7 +8,7 @@ import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
 import { Button, Typography, TextField } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
-import Survey from "../SurveyEditor/SurveyEditor";
+import Editor from "../Editor/Editor";
 
 const Accordion = withStyles({
   root: {
@@ -119,7 +119,7 @@ export default function Settings() {
           <HelpOutlineIcon />
         </AccordionSummary>
         <AccordionDetails>
-          <Survey />
+          <Editor />
         </AccordionDetails>
       </Accordion>
       <Accordion
