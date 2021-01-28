@@ -13,9 +13,9 @@
 }
 .toolBar {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
-.score {
+.bold {
   font-size: 20px;
   font-weight: 500;
 }

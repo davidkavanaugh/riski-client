@@ -18,6 +18,11 @@ const Scoreboard = (props) => {
         ? theme.palette.primary.dark
         : theme.palette.danger.main,
     },
+    name: {
+      color: isDisabled()
+        ? theme.palette.danger.main
+        : theme.palette.primary.dark,
+    },
   }));
   const classes = useStyles();
 
@@ -25,13 +30,15 @@ const Scoreboard = (props) => {
     <div className={css.root}>
       <AppBar className={css.appBar} color="inherit" position="fixed">
         <Toolbar className={css.toolBar}>
-          <span></span>
-          <div className={css.name}>
-            {name.first} {name.middle} {name.last}
-          </div>
-          <div>
-            <span className={css.scoreTotal}>Total Score: </span>
-            <span className={`${css.score} ${classes.score}`}>{score}</span>
+          <div style={{ minWidth: "300px" }}>
+            <span className={css.bold}>Name: </span>
+            <span className={`${css.bold} ${classes.name}`}>
+              {name.first} {name.middle} {name.last}
+            </span>
+            <div style={{ minWidth: "150px" }}>
+              <span className={css.bold}>Total Score: </span>
+              <span className={`${css.bold} ${classes.score}`}>{score}</span>
+            </div>
           </div>
           <span className={css.btnContainer}>
             {isFinished() && <ViewResults />}
