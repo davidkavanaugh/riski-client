@@ -36,7 +36,7 @@ const Scoreboard = (props) => {
               {name.first} {name.middle} {name.last}
             </span>
             <div style={{ minWidth: "150px" }}>
-              <span className={css.bold}>Total Score: </span>
+              <span className={css.bold}>Risk Score: </span>
               <span className={`${css.bold} ${classes.score}`}>{score}</span>
             </div>
           </div>
