@@ -65,6 +65,9 @@ export default function Settings() {
         backgroundColor: theme.palette.primary.dark,
       },
     },
+    content: {
+      padding: theme.spacing(3),
+    },
   }));
 
   const classes = useStyles();
@@ -75,7 +78,7 @@ export default function Settings() {
   };
 
   return (
-    <div>
+    <div className={classes.content}>
       <Accordion
         square
         expanded={expanded === "panel1"}

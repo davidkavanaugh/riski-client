@@ -6,7 +6,7 @@ import { SurveyContext } from "../../../context";
 import css from "./Question.module.css";
 
 const Question = (props) => {
-  const { questionIdx, query, image, answers } = props;
+  const { questionIdx, query, image, answers, isDisabled } = props;
 
   const { responsesState, setResponses } = useContext(SurveyContext);
 
@@ -31,9 +31,10 @@ const Question = (props) => {
     }
     return false;
   };
+
   return (
     <li>
-      <div>{query}</div>
+      <div style={{ fontSize: "17px" }}>{query}</div>
       {image.url && <img src={image.url} alt="additional info" />}
       <RadioGroup onChange={handleChange}>
         {answers.map((answer, index) => {
@@ -48,6 +49,7 @@ const Question = (props) => {
               control={<Radio />}
               label={answer.text}
               checked={isChecked(answer.text)}
+              disabled={isDisabled()}
             />
           );
         })}

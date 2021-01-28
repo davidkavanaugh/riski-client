@@ -1,30 +1,19 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import { Button } from "@material-ui/core";
+import { Button, Dialog, DialogContent, Backdrop } from "@material-ui/core";
 import cookie from "js-cookie";
 
 const useStyles = makeStyles((theme) => ({
-  modal: {
+  dialog: {
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
   },
 }));
 
 const Alert = (props) => {
   const classes = useStyles();
   const { open, setOpen } = props;
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -40,45 +29,38 @@ const Alert = (props) => {
   };
 
   return (
-    <div>
-      <button type="button" onClick={handleOpen}>
-        react-transition-group
-      </button>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
-        open={open}
-        onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
-      >
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <h2 id="transition-modal-title">New Survey?</h2>
-            <Button
-              color="default"
-              variant="contained"
-              style={{ marginRight: "5px" }}
-              onClick={handleCancel}
-            >
-              Cancel
-            </Button>
-            <Button
-              color="primary"
-              variant="contained"
-              style={{ color: "white" }}
-              onClick={handleSubmit}
-            >
-              OK
-            </Button>
-          </div>
-        </Fade>
-      </Modal>
-    </div>
+    <Dialog
+      aria-labelledby="transition-modal-title"
+      aria-describedby="transition-modal-description"
+      className={classes.dialog}
+      open={open}
+      onClose={handleClose}
+      closeAfterTransition
+      BackdropComponent={Backdrop}
+      BackdropProps={{
+        timeout: 500,
+      }}
+    >
+      <DialogContent style={{ padding: "10px 25px 25px 25px" }}>
+        <h2 id="transition-modal-title">New Survey?</h2>
+        <Button
+          color="default"
+          variant="contained"
+          style={{ marginRight: "5px" }}
+          onClick={handleCancel}
+        >
+          Cancel
+        </Button>
+        <Button
+          color="primary"
+          variant="contained"
+          style={{ color: "white" }}
+          onClick={handleSubmit}
+        >
+          OK
+        </Button>
+      </DialogContent>
+    </Dialog>
   );
 };
 

@@ -1,10 +1,13 @@
 import React, { useEffect, useReducer, useContext } from "react";
 import { EditorContext } from "../../../context";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
-import { Button, TextField } from "@material-ui/core";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogContent,
+  Backdrop,
+} from "@material-ui/core";
 import css from "./EditAnswer.module.css";
 import styles from "../../../styles/editAnswer.styles.js";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
@@ -61,10 +64,8 @@ const EditAnswer = (props) => {
     handleClose();
   };
   return (
-    <Modal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
-      className={css.modal}
+    <Dialog
+      className={css.dialog}
       open={open}
       onClose={handleClose}
       closeAfterTransition
@@ -73,48 +74,46 @@ const EditAnswer = (props) => {
         timeout: 500,
       }}
     >
-      <Fade in={open}>
-        <div className={`${classes.paper} ${css.paper}`}>
-          <h2>Edit Answer</h2>
+      <DialogContent style={{ paddingTop: "10px", paddingBottom: "25px" }}>
+        <h2>Edit Answer</h2>
 
-          <div className={css.formGroup}>
+        <div className={css.formGroup}>
+          <TextField
+            name="answer"
+            color="primary"
+            label="Edit answer"
+            fullWidth={true}
+            multiline
+            rowsMax={4}
+            value={state.answer}
+            onChange={handleChange}
+            variant="outlined"
+            size="small"
+          />
+          <div style={{ display: "flex" }}>
             <TextField
-              name="answer"
+              name="points"
+              type="number"
               color="primary"
-              label="Edit answer"
-              fullWidth={true}
-              multiline
-              rowsMax={4}
-              value={state.answer}
+              label="Points"
+              value={state.points}
               onChange={handleChange}
               variant="outlined"
               size="small"
             />
-            <div style={{ display: "flex" }}>
-              <TextField
-                name="points"
-                type="number"
-                color="primary"
-                label="Points"
-                value={state.points}
-                onChange={handleChange}
-                variant="outlined"
-                size="small"
-              />
-              <Button
-                style={{ marginLeft: "5px" }}
-                className={`${classes.btn} ${css.btn}`}
-                aria-label="Add Answer"
-                onClick={handleSubmit}
-                disabled={state.answer && state.points ? false : true}
-              >
-                <CheckCircleIcon />
-              </Button>
-            </div>
+            <Button
+              style={{ marginLeft: "5px" }}
+              className={`${classes.btn} ${css.btn}`}
+              aria-label="Add Answer"
+              onClick={handleSubmit}
+              disabled={state.answer && state.points ? false : true}
+            >
+              <CheckCircleIcon />
+            </Button>
           </div>
         </div>
-      </Fade>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 };
 export default EditAnswer;

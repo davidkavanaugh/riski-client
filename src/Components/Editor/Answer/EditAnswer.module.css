@@ -7,11 +7,7 @@
   width: 100%;
 }
 
-.paper {
-  border: "2px solid #000";
-}
-
-.modal {
+.dialog {
   display: flex;
   align-items: center;
   justify-content: center;

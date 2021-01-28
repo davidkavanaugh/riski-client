@@ -1,0 +1,32 @@
+.appBar {
+  margin-top: 64px;
+  padding-left: 65px;
+}
+.name {
+  color: black;
+  font-weight: 500;
+  font-size: 20px;
+}
+.root {
+  flex-grow: 1;
+  margin-top: 64px;
+}
+.toolBar {
+  display: flex;
+  justify-content: space-around;
+}
+.score {
+  font-size: 20px;
+  font-weight: 500;
+}
+.scoreTotal {
+  font-weight: 500;
+  font-size: 20px;
+}
+.btn {
+  color: "white";
+  font-variant: small-caps;
+}
+.btnContainer {
+  width: 100px;
+}

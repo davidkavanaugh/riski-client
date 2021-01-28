@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { EditorContext } from "../../../context";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
 import { Button } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
@@ -15,16 +14,10 @@ const useStyles = makeStyles((theme) => ({
       background: theme.palette.danger.dark,
     },
   },
-  modal: {
+  dialog: {
+    padding: "10px 25px 25px 25px",
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    backgroundColor: theme.palette.background.paper,
-    borderRadius: "5px",
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
+    flexDirection: "column",
   },
 }));
 
@@ -41,36 +34,28 @@ const DeleteQuestion = (props) => {
   };
   return (
     <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={classes.modal}
+      <Dialog
         open={open}
         onClose={handleClose}
-        closeAfterTransition
-        BackdropComponent={Backdrop}
-        BackdropProps={{
-          timeout: 500,
-        }}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
       >
-        <Fade in={open}>
-          <div className={classes.paper}>
-            <h2>Delete Question?</h2>
-            <div>
-              <Button variant="contained" color="default" onClick={handleClose}>
-                Cancel
-              </Button>
-              <Button
-                variant="contained"
-                className={classes.deleteBtn}
-                onClick={() => handleDelete(idx)}
-              >
-                Delete
-              </Button>
-            </div>
+        <DialogActions className={classes.dialog}>
+          <h2>Delete Question ?</h2>
+          <div>
+            <Button variant="contained" color="default" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              className={classes.deleteBtn}
+              onClick={() => handleDelete(idx)}
+            >
+              Delete
+            </Button>
           </div>
-        </Fade>
-      </Modal>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

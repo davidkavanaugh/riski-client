@@ -1,10 +1,13 @@
 import React, { useContext, useReducer, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Modal from "@material-ui/core/Modal";
-import Backdrop from "@material-ui/core/Backdrop";
-import Fade from "@material-ui/core/Fade";
 import { EditorContext } from "../../../context";
-import { Button, TextField } from "@material-ui/core";
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogContent,
+  Backdrop,
+} from "@material-ui/core";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import BlockIcon from "@material-ui/icons/Block";
@@ -104,10 +107,8 @@ const EditQuestion = (props) => {
 
   return (
     <div>
-      <Modal
-        aria-labelledby="transition-modal-title"
-        aria-describedby="transition-modal-description"
-        className={css.modal}
+      <Dialog
+        className={css.dialog}
         open={open}
         onClose={handleClose}
         closeAfterTransition
@@ -116,76 +117,73 @@ const EditQuestion = (props) => {
           timeout: 500,
         }}
       >
-        <Fade in={open}>
-          <div className={`${classes.paper} ${css.paper}`}>
-            <h2>Edit Question</h2>
+        <DialogContent style={{ paddingTop: "10px" }}>
+          <h2>Edit Question</h2>
+          {/* TEXT INPUT */}
+          <div className={css.formGroup}>
+            <TextField
+              name="query"
+              className={classes.questionInput}
+              color="primary"
+              label="Edit question"
+              fullWidth={true}
+              multiline
+              rowsMax={4}
+              value={questionState.question}
+              onChange={handleChange}
+              variant="outlined"
+            />
 
-            {/* TEXT INPUT */}
-            <div className={css.formGroup}>
-              <TextField
-                name="query"
-                className={classes.questionInput}
-                color="primary"
-                label="Edit question"
-                fullWidth={true}
-                multiline
-                rowsMax={4}
-                value={questionState.question}
-                onChange={handleChange}
-                variant="outlined"
-              />
-
-              {/* SELECTED IMAGE */}
-              {questionState.image.url && (
-                <div className={css.selected} onClick={handleImgDeselect}>
-                  <div className={`${css.overlay} ${classes.dangerText}`}>
-                    <BlockIcon className={css.deleteImgIcon} fontSize="large" />
-                  </div>
-                  <img
-                    className={css.selectedImg}
-                    src={questionState.image.url}
-                    alt="selected"
-                  />
+            {/* SELECTED IMAGE */}
+            {questionState.image.url && (
+              <div className={css.selected} onClick={handleImgDeselect}>
+                <div className={`${css.overlay} ${classes.dangerText}`}>
+                  <BlockIcon className={css.deleteImgIcon} fontSize="large" />
                 </div>
-              )}
-
-              {/* SELECT AN IMAGE */}
-              {!questionState.image.url && ( // only display btn if no image is selected
-                <>
-                  <input
-                    type="file"
-                    className={css.hidden}
-                    accept="image/*"
-                    id={`questionImg${idx}`}
-                    name="logo"
-                    onChange={handleImgSelect}
-                  />
-
-                  <label
-                    htmlFor={`questionImg${idx}`}
-                    style={{ cursor: "pointer" }}
-                    className={`${classes.imgUploadBtn} ${css.imgUploadBtn}`}
-                  >
-                    <ImageOutlinedIcon />
-                  </label>
-                </>
-              )}
-
-              {/* SUBMIT QUESTION */}
-              <div>
-                <Button
-                  className={`${classes.btn} ${css.btn}`}
-                  aria-label="Update Question"
-                  onClick={handleSubmit}
-                  disabled={questionState.question ? false : true}
-                >
-                  <CheckCircleIcon />
-                </Button>
+                <img
+                  className={css.selectedImg}
+                  src={questionState.image.url}
+                  alt="selected"
+                />
               </div>
+            )}
+
+            {/* SELECT AN IMAGE */}
+            {!questionState.image.url && ( // only display btn if no image is selected
+              <>
+                <input
+                  type="file"
+                  className={css.hidden}
+                  accept="image/*"
+                  id={`questionImg${idx}`}
+                  name="logo"
+                  onChange={handleImgSelect}
+                />
+
+                <label
+                  htmlFor={`questionImg${idx}`}
+                  style={{ cursor: "pointer" }}
+                  className={`${classes.imgUploadBtn} ${css.imgUploadBtn}`}
+                >
+                  <ImageOutlinedIcon />
+                </label>
+              </>
+            )}
+
+            {/* SUBMIT QUESTION */}
+            <div>
+              <Button
+                className={`${classes.btn} ${css.btn}`}
+                aria-label="Update Question"
+                onClick={handleSubmit}
+                disabled={questionState.question ? false : true}
+              >
+                <CheckCircleIcon />
+              </Button>
             </div>
           </div>
-        </Fade>
-      </Modal>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

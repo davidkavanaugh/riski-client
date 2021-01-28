@@ -13,7 +13,15 @@ export const responsesInitialState = {
 export const responsesReducer = (state, action) => {
   switch (action.type) {
     case "clearCache":
-      return responsesInitialState;
+      return {
+        name: {
+          first: "",
+          middle: "",
+          last: "",
+        },
+        questions: [],
+        total: 0,
+      };
     case "getResponses":
       let cache = cookie.getJSON("survey");
       return {
@@ -37,20 +45,27 @@ export const responsesReducer = (state, action) => {
         points: action.points,
       };
 
-      cookie.set(
-        "survey",
-        {
-          ...state,
-          questions: selectAnswerQuestionsCopy,
-          total: newTotal,
-        },
-        { expires: Date.now() + 3600000 }
-      );
+      cookie.set("survey", {
+        ...state,
+        questions: selectAnswerQuestionsCopy,
+        total: newTotal,
+      });
 
       return {
         ...state,
         questions: selectAnswerQuestionsCopy,
         total: newTotal,
+      };
+    case "updateName":
+      let updateNameCopy = state.name;
+      updateNameCopy[action.property] = action.payload;
+      cookie.set("survey", {
+        ...state,
+        name: updateNameCopy,
+      });
+      return {
+        ...state,
+        name: updateNameCopy,
       };
     default:
       throw new Error("action type not recognized");
