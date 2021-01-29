@@ -4,7 +4,6 @@ import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { SurveyContext } from "../../../context";
 import css from "./Question.module.css";
-
 const Question = (props) => {
   const { questionIdx, query, image, answers, isDisabled } = props;
 
@@ -33,7 +32,7 @@ const Question = (props) => {
   };
 
   return (
-    <li>
+    <li className={css.radioGroup}>
       <div style={{ fontSize: "17px" }}>{query}</div>
       {image.url && <img src={image.url} alt="additional info" />}
       <RadioGroup onChange={handleChange}>

@@ -13,6 +13,7 @@ import {
 } from "../../reducers/Responses.reducer";
 import Question from "./Question/Question";
 import Scoreboard from "./Scoreboard/Scoreboard";
+import css from "./Survey.module.css";
 
 const Survey = () => {
   const useStyles = makeStyles((theme) => ({
@@ -86,7 +87,7 @@ const Survey = () => {
         responses={responsesState.questions}
         isDisabled={isDisabled}
       />
-      <div className={classes.content}>
+      <div className={`${classes.content} ${css.content}`}>
         <TextField
           name="first"
           className={classes.textField}
