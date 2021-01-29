@@ -7,7 +7,10 @@ import css from "./Scoreboard.module.css";
 const Scoreboard = (props) => {
   const { name, score, questions, responses, isDisabled } = props;
   const isFinished = () => {
-    if (responses.length === questions.length && !isDisabled()) {
+    if (
+      responses.filter((i) => i !== null).length === questions.length &&
+      !isDisabled()
+    ) {
       return true;
     }
     return false;
@@ -25,7 +28,6 @@ const Scoreboard = (props) => {
     },
   }));
   const classes = useStyles();
-
   return (
     <div className={css.root}>
       <AppBar className={css.appBar} color="inherit" position="fixed">
