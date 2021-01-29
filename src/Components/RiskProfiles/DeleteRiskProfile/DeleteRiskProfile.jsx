@@ -10,7 +10,7 @@ const DeleteRiskProfile = (props) => {
   const { idx } = props;
   const useStyles = makeStyles((theme) => styles(theme));
   const classes = useStyles();
-  const { state, dispatch } = useContext(RiskProfilesContext);
+  const { dispatch } = useContext(RiskProfilesContext);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
