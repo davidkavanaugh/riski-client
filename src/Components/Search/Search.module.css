@@ -1,0 +1,14 @@
+.wrapper {
+  width: 90%;
+  max-width: 970px;
+  padding: 50px 50px;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
+.spacer {
+  margin-right: 10px;
+}

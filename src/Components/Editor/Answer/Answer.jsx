@@ -6,11 +6,14 @@ import EditOutlinedIcon from "@material-ui/icons/EditOutlined";
 import IconButton from "@material-ui/core/IconButton";
 import EditAnswer from "./EditAnswer";
 import css from "./Answer.module.css";
+import actionStyles from "../../../styles/actionButtons.styles";
 import styles from "../../../styles/answer.styles";
 
 const Answer = (props) => {
   const useStyles = makeStyles((theme) => styles(theme));
   const classes = useStyles();
+  const useActionStyles = makeStyles((theme) => actionStyles(theme));
+  const actionClasses = useActionStyles();
   const { answerIdx, questionIdx, answers, text, points } = props;
   const { dispatch } = useContext(EditorContext);
   const reducer = (state, action) => {
@@ -54,7 +57,7 @@ const Answer = (props) => {
           <span className={classes.points}>{points}</span>
           <span className={css.actions}>
             <IconButton
-              className={classes.edit}
+              className={actionClasses.edit}
               size="small"
               edge="start"
               onClick={openModal}
@@ -63,7 +66,7 @@ const Answer = (props) => {
             </IconButton>
             <span className={css.btnSpacer}></span>
             <IconButton
-              className={classes.delete}
+              className={actionClasses.delete}
               size="small"
               edge="start"
               onClick={() => handleDeleteAnswer(answerIdx, questionIdx)}

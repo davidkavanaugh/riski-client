@@ -6,9 +6,10 @@ import MuiAccordionDetails from "@material-ui/core/AccordionDetails";
 import AccountBalanceIcon from "@material-ui/icons/AccountBalance";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
 import HelpOutlineIcon from "@material-ui/icons/HelpOutline";
-import { Button, Typography, TextField } from "@material-ui/core";
+import { Button, TextField } from "@material-ui/core";
 import EditIcon from "@material-ui/icons/Edit";
 import Editor from "../Editor/Editor";
+import RiskProfiles from "../RiskProfiles/RiskProfiles";
 
 const Accordion = withStyles({
   root: {
@@ -134,12 +135,7 @@ export default function Settings() {
           <AccountBalanceIcon />
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget. Lorem ipsum
-            dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada
-            lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <RiskProfiles />
         </AccordionDetails>
       </Accordion>
     </div>

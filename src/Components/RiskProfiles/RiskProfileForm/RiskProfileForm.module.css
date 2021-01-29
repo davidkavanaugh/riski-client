@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  width: 470px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 20px;
+}
+
+.marginBottom {
+  margin-bottom: 10px;
+}
+
+.marginRight {
+  margin-right: 10px;
+}

@@ -7,7 +7,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import IconButton from "@material-ui/core/IconButton";
 import NewAnswer from "../Answer/NewAnswer";
-import styles from "../../../styles/question.styles";
+import styles from "../../../styles/actionButtons.styles";
 import css from "./Question.module.css";
 
 const Question = (props) => {

@@ -1,3 +1,6 @@
 .formWrapper {
-  width: 100%;
+  width: 90%;
+  max-width: 970px;
+  margin-left: auto;
+  margin-right: auto;
 }

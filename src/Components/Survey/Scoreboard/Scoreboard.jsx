@@ -37,7 +37,9 @@ const Scoreboard = (props) => {
             </span>
             <div style={{ minWidth: "150px" }}>
               <span className={css.bold}>Risk Score: </span>
-              <span className={`${css.bold} ${classes.score}`}>{score}</span>
+              <span className={`${css.bold} ${classes.score}`}>
+                {Math.round(score * 10) / 10}
+              </span>
             </div>
           </div>
           <span className={css.btnContainer}>

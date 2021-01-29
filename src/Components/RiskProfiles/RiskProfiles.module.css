@@ -1,0 +1,33 @@
+.actions {
+  display: flex;
+}
+
+.createNew {
+  text-align: center;
+}
+.italic {
+  font-style: italic;
+}
+.score {
+  font-weight: bold;
+  min-width: 100px;
+}
+.spacer {
+  width: 10px;
+}
+.table {
+  min-width: 600px;
+  max-width: 950px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 25px;
+}
+.title {
+  font-weight: bold;
+}
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 25px;
+}

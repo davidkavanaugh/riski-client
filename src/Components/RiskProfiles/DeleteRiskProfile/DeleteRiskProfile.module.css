@@ -1,0 +1,8 @@
+.dialog {
+  padding: 10px 25px 25px 25px;
+  display: flex;
+  flex-direction: column;
+}
+.spacer {
+  margin-right: 10px;
+}

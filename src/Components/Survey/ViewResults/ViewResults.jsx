@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from "react";
+import { navigate } from "@reach/router";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import cookie from "js-cookie";
 
 export default function ScrollDialog() {
   const [open, setOpen] = React.useState(false);
@@ -17,6 +18,12 @@ export default function ScrollDialog() {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const handleSubmit = () => {
+    cookie.remove("survey");
+    navigate("/new");
+    handleClose();
   };
 
   const descriptionElementRef = useRef(null);
@@ -47,8 +54,13 @@ export default function ScrollDialog() {
         aria-describedby="scroll-dialog-description"
       >
         <DialogTitle id="scroll-dialog-title"></DialogTitle>
-        <DialogContent dividers={scroll === "paper"}>
-          <p></p>
+        <DialogContent>
+          <h2 style={{ marginTop: "0px" }}>Moderate</h2>
+          <p>
+            Your primary investment goal is to focus on long-term growth of
+            principal but within the context of moderating overall levels of
+            risk through allocation of portfolio assets in a balanced manner
+          </p>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="secondary">
@@ -56,7 +68,7 @@ export default function ScrollDialog() {
           </Button>
           <Button
             style={{ color: "white" }}
-            onClick={handleClose}
+            onClick={handleSubmit}
             color="primary"
             variant="contained"
           >
