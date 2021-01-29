@@ -1,4 +1,4 @@
-import React, { useContext, useReducer } from "react";
+import React, { useContext, useReducer, useState } from "react";
 import { EditorContext } from "../../../context";
 import { Button, TextField } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
@@ -10,13 +10,16 @@ import css from "./NewQuestion.module.css";
 const QuestionForm = (props) => {
   const useStyles = makeStyles((theme) => styles(theme));
   const classes = useStyles();
-  const { dispatch } = useContext(EditorContext);
+  const { state, dispatch } = useContext(EditorContext);
   const reducer = (state, action) => {
     return {
       ...state,
       [action.type]: action.payload,
     };
   };
+  const [questionNumber, setQuestionNumber] = useState(
+    state.questions.length + 1
+  );
 
   const [questionState, setQuestionState] = useReducer(reducer, {
     question: "",
@@ -30,6 +33,7 @@ const QuestionForm = (props) => {
     dispatch({
       type: "addQuery",
       query: questionState.question,
+      index: questionNumber,
       image: questionState.image,
     });
     setQuestionState({
@@ -43,6 +47,7 @@ const QuestionForm = (props) => {
         url: "",
       },
     });
+    setQuestionNumber(questionNumber + 1);
   };
 
   const handleChange = (e) => {
@@ -78,6 +83,15 @@ const QuestionForm = (props) => {
 
   return (
     <div className={css.formGroup}>
+      <TextField
+        name="questionNumber"
+        color="primary"
+        label="#"
+        variant="outlined"
+        style={{ width: "75px" }}
+        value={questionNumber}
+        onChange={(e) => setQuestionNumber(e.target.value)}
+      />
       <TextField
         name="query"
         className={classes.questionInput}

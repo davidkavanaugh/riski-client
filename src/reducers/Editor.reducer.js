@@ -320,7 +320,7 @@ export const editorReducer = (state, action) => {
       return { ...state, questions: questionsCopyAddAnswer };
     case "addQuery":
       let questionsCopyAddQuery = [...state.questions];
-      questionsCopyAddQuery.push({
+      questionsCopyAddQuery.splice(action.index, 0, {
         query: action.query,
         image: action.image,
         answers: [],
