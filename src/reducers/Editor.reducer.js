@@ -325,6 +325,7 @@ export const editorReducer = (state, action) => {
         image: action.image,
         answers: [],
       });
+      console.log(questionsCopyAddQuery);
       return {
         ...state,
         questions: questionsCopyAddQuery,

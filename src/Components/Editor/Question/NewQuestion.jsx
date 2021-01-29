@@ -18,7 +18,7 @@ const QuestionForm = (props) => {
     };
   };
   const [questionNumber, setQuestionNumber] = useState(
-    state.questions.length + 1
+    parseInt(state.questions.length) + 1
   );
 
   const [questionState, setQuestionState] = useReducer(reducer, {
@@ -47,7 +47,7 @@ const QuestionForm = (props) => {
         url: "",
       },
     });
-    setQuestionNumber(questionNumber + 1);
+    setQuestionNumber(parseInt(state.questions.length) + 2);
   };
 
   const handleChange = (e) => {
@@ -92,6 +92,7 @@ const QuestionForm = (props) => {
         value={questionNumber}
         onChange={(e) => setQuestionNumber(e.target.value)}
       />
+      <span className={css.spacer}></span>
       <TextField
         name="query"
         className={classes.questionInput}
