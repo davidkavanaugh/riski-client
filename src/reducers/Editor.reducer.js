@@ -320,12 +320,11 @@ export const editorReducer = (state, action) => {
       return { ...state, questions: questionsCopyAddAnswer };
     case "addQuery":
       let questionsCopyAddQuery = [...state.questions];
-      questionsCopyAddQuery.splice(action.index, 0, {
+      questionsCopyAddQuery.splice(action.index - 1, 0, {
         query: action.query,
         image: action.image,
         answers: [],
       });
-      console.log(questionsCopyAddQuery);
       return {
         ...state,
         questions: questionsCopyAddQuery,
@@ -352,10 +351,21 @@ export const editorReducer = (state, action) => {
         questions: questionsArrDeleteQuestion,
       };
     case "updateQuestion":
-      const questionsArrUpdateQuestion = [...state.questions];
-      const questionToUpdate = questionsArrUpdateQuestion[action.questionIndex];
+      const questionToUpdate = [...state.questions][action.questionIndex];
       questionToUpdate.query = action.query;
       questionToUpdate.image = action.image;
+
+      let questionsArrUpdateQuestion = [
+        ...state.questions.slice(0, action.questionIndex),
+        ...state.questions.slice(action.questionIndex + 1),
+      ];
+
+      questionsArrUpdateQuestion.splice(
+        action.questionNumber - 1,
+        0,
+        questionToUpdate
+      );
+
       return {
         ...state,
         questions: questionsArrUpdateQuestion,

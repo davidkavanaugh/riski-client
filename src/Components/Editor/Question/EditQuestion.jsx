@@ -1,23 +1,10 @@
-import React, { useContext, useReducer, useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useContext, useReducer, useState, useEffect } from "react";
 import { EditorContext } from "../../../context";
-import {
-  Button,
-  TextField,
-  Dialog,
-  DialogContent,
-  Backdrop,
-} from "@material-ui/core";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
-import BlockIcon from "@material-ui/icons/Block";
+import { Dialog, DialogContent, Backdrop } from "@material-ui/core";
+import QuestionForm from "./QuestionForm";
 import css from "./EditQuestion.module.css";
-import styles from "../../../styles/editQuestion.styles";
-
-const useStyles = makeStyles((theme) => styles(theme));
 
 const EditQuestion = (props) => {
-  const classes = useStyles();
   const { idx, open, closeModal } = props;
   const { state, dispatch } = useContext(EditorContext);
 
@@ -29,12 +16,12 @@ const EditQuestion = (props) => {
   };
 
   const [questionState, setQuestionState] = useReducer(reducer, {
-    question: "",
-    image: {
-      file: undefined,
-      url: "",
-    },
+    question: state.questions[idx].query,
+    questionNumber: parseInt(idx) + 1,
   });
+  const { question, questionNumber } = questionState;
+
+  const [image, setImage] = useState(state.questions[idx].image);
 
   useEffect(() => {
     setQuestionState({
@@ -42,72 +29,76 @@ const EditQuestion = (props) => {
       payload: state.questions[idx].query,
     });
     setQuestionState({
-      type: "image",
-      payload: {
-        file: state.questions[idx].image.file,
-        url: state.questions[idx].image.url,
-      },
+      type: "questionNumber",
+      payload: parseInt(idx) + 1,
     });
-  }, []);
+    setImage(state.questions[idx].image);
+  }, [state.questions]);
 
   const handleChange = (e) => {
-    const { value } = e.target;
-    setQuestionState({ type: "question", payload: value });
+    const { name, value } = e.target;
+    setQuestionState({ type: name, payload: value });
   };
+
+  const handleClose = () => {
+    closeModal();
+    setQuestionState({
+      type: "question",
+      payload: state.questions[idx].query,
+    });
+    setQuestionState({
+      type: "questionNumber",
+      payload: parseInt(idx) + 1,
+    });
+    setImage(state.questions[idx].image);
+  };
+
   const handleImgSelect = (e) => {
     e.preventDefault();
     var reader = new FileReader();
     var file = e.target.files[0];
     reader.onload = (upload) => {
-      setQuestionState({
-        type: "image",
-        payload: {
-          file: file,
-          url: upload.target.result, // url is base64 string
-        },
+      setImage({
+        file: undefined,
+        url: upload.target.result,
       });
     };
     reader.readAsDataURL(file);
   };
 
   const handleImgDeselect = () => {
-    setQuestionState({
-      type: "image",
-      payload: {
-        file: undefined,
-        url: "",
-      },
+    setImage({
+      file: undefined,
+      url: "",
     });
   };
 
   const handleSubmit = () => {
+    let tempQuestionNumber = questionNumber;
+    if (!tempQuestionNumber) {
+      tempQuestionNumber = parseInt(idx) + 1;
+    }
+    if (tempQuestionNumber < 0) {
+      tempQuestionNumber = 1;
+    }
+    if (tempQuestionNumber > parseInt(state.questions.length) + 1) {
+      tempQuestionNumber = parseInt(state.questions.length);
+    }
+
     dispatch({
       type: "updateQuestion",
       questionIndex: idx,
-      query: questionState.question,
-      image: questionState.image,
+      query: question,
+      image: image,
+      questionNumber: tempQuestionNumber,
     });
     handleClose();
   };
-
-  const handleClose = () => {
-    closeModal();
-    setQuestionState({
-      type: "image",
-      payload: {
-        file: state.questions[idx].image.file,
-        url: state.questions[idx].image.url,
-      },
-    });
-    setQuestionState({
-      type: "question",
-      payload: state.questions[idx].query,
-    });
-  };
-
   return (
     <div>
       <Dialog
+        maxWidth="lg"
+        fullWidth={true}
         className={css.dialog}
         open={open}
         onClose={handleClose}
@@ -117,70 +108,19 @@ const EditQuestion = (props) => {
           timeout: 500,
         }}
       >
-        <DialogContent style={{ paddingTop: "10px" }}>
+        <DialogContent style={{ paddingTop: "10px", paddingBottom: "25px" }}>
           <h2>Edit Question</h2>
-          {/* TEXT INPUT */}
-          <div className={css.formGroup}>
-            <TextField
-              name="query"
-              className={classes.questionInput}
-              color="primary"
-              label="Edit question"
-              fullWidth={true}
-              multiline
-              rowsMax={4}
-              value={questionState.question}
+          <div style={{ width: "800px" }}>
+            <QuestionForm
+              idx={idx}
+              question={question}
+              questionNumber={questionNumber}
+              image={image}
               onChange={handleChange}
-              variant="outlined"
+              onSelect={handleImgSelect}
+              onDeselect={handleImgDeselect}
+              onSubmit={handleSubmit}
             />
-
-            {/* SELECTED IMAGE */}
-            {questionState.image.url && (
-              <div className={css.selected} onClick={handleImgDeselect}>
-                <div className={`${css.overlay} ${classes.dangerText}`}>
-                  <BlockIcon className={css.deleteImgIcon} fontSize="large" />
-                </div>
-                <img
-                  className={css.selectedImg}
-                  src={questionState.image.url}
-                  alt="selected"
-                />
-              </div>
-            )}
-
-            {/* SELECT AN IMAGE */}
-            {!questionState.image.url && ( // only display btn if no image is selected
-              <>
-                <input
-                  type="file"
-                  className={css.hidden}
-                  accept="image/*"
-                  id={`questionImg${idx}`}
-                  name="logo"
-                  onChange={handleImgSelect}
-                />
-
-                <label
-                  htmlFor={`questionImg${idx}`}
-                  style={{ cursor: "pointer" }}
-                  className={`${classes.imgUploadBtn} ${css.imgUploadBtn}`}
-                >
-                  <ImageOutlinedIcon />
-                </label>
-              </>
-            )}
-
-            {/* SUBMIT QUESTION */}
-            <div>
-              <Button
-                className={`${classes.btn} ${css.btn}`}
-                aria-label="Update Question"
-                onClick={handleSubmit}
-                disabled={questionState.question ? false : true}
-              >
-                <CheckCircleIcon />
-              </Button>
-            </div>
           </div>
         </DialogContent>
       </Dialog>

@@ -1,15 +1,8 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, { useContext, useReducer, useEffect } from "react";
 import { EditorContext } from "../../../context";
-import { Button, TextField } from "@material-ui/core";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
-import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
-import BlockIcon from "@material-ui/icons/Block";
-import { makeStyles } from "@material-ui/core/styles";
-import styles from "../../../styles/newQuestion.styles";
-import css from "./NewQuestion.module.css";
-const QuestionForm = (props) => {
-  const useStyles = makeStyles((theme) => styles(theme));
-  const classes = useStyles();
+import QuestionForm from "./QuestionForm";
+
+const NewQuestion = () => {
   const { state, dispatch } = useContext(EditorContext);
   const reducer = (state, action) => {
     return {
@@ -17,28 +10,38 @@ const QuestionForm = (props) => {
       [action.type]: action.payload,
     };
   };
-  const [questionNumber, setQuestionNumber] = useState(
-    parseInt(state.questions.length) + 1
-  );
 
   const [questionState, setQuestionState] = useReducer(reducer, {
     question: "",
+    questionNumber: parseInt(state.questions.length) + 1,
     image: {
       file: undefined,
       url: "",
     },
   });
 
-  const addQuery = () => {
+  const { question, questionNumber, image } = questionState;
+
+  useEffect(() => {
+    setQuestionState({
+      type: "questionNumber",
+      payload: parseInt(state.questions.length) + 1,
+    });
+  }, [state.questions.length]);
+
+  const handleSubmit = () => {
+    let actionIndex = questionNumber;
+    if (!actionIndex) {
+      actionIndex = parseInt(state.questions.length) + 1;
+    }
+    if (actionIndex < 1) {
+      actionIndex = 1;
+    }
     dispatch({
       type: "addQuery",
-      query: questionState.question,
-      index: questionNumber,
-      image: questionState.image,
-    });
-    setQuestionState({
-      type: "question",
-      payload: "",
+      query: question,
+      index: actionIndex,
+      image: image,
     });
     setQuestionState({
       type: "image",
@@ -47,12 +50,15 @@ const QuestionForm = (props) => {
         url: "",
       },
     });
-    setQuestionNumber(parseInt(state.questions.length) + 2);
+    setQuestionState({
+      type: "question",
+      payload: "",
+    });
   };
 
   const handleChange = (e) => {
-    const { value } = e.target;
-    setQuestionState({ type: "question", payload: value });
+    const { name, value } = e.target;
+    setQuestionState({ type: name, payload: value });
   };
 
   const handleImgSelect = (e) => {
@@ -82,79 +88,16 @@ const QuestionForm = (props) => {
   };
 
   return (
-    <div className={css.formGroup}>
-      <TextField
-        name="questionNumber"
-        color="primary"
-        label="#"
-        variant="outlined"
-        style={{ width: "75px" }}
-        value={questionNumber}
-        onChange={(e) => setQuestionNumber(e.target.value)}
-      />
-      <span className={css.spacer}></span>
-      <TextField
-        name="query"
-        className={classes.questionInput}
-        color="primary"
-        label="Type a new question"
-        fullWidth={true}
-        multiline
-        rowsMax={4}
-        value={questionState.question}
-        onChange={handleChange}
-        variant="outlined"
-      />
-
-      {/* SELECTED IMAGE */}
-      {questionState.image.url && (
-        <div className={css.selected} onClick={handleImgDeselect}>
-          <div className={`${css.overlay} ${classes.dangerText}`}>
-            <BlockIcon className={css.deleteImgIcon} fontSize="large" />
-          </div>
-          <img
-            className={css.selectedImg}
-            src={questionState.image.url}
-            alt="selected"
-          />
-        </div>
-      )}
-
-      {/* SELECT AN IMAGE */}
-
-      {!questionState.image.url && (
-        <>
-          <input
-            type="file"
-            className={css.hidden}
-            accept="image/*"
-            id="newQuestionImg"
-            name="newQuestionImg"
-            onChange={handleImgSelect}
-          />
-
-          <label
-            htmlFor="newQuestionImg"
-            style={{ cursor: "pointer" }}
-            className={`${classes.imgUploadBtn} ${css.imgUploadBtn}`}
-          >
-            <ImageOutlinedIcon />
-          </label>
-        </>
-      )}
-
-      {/* SUBMIT QUESTION */}
-      <div>
-        <Button
-          className={`${classes.btn} ${css.btn}`}
-          aria-label="Add Question"
-          onClick={addQuery}
-          disabled={questionState.question ? false : true}
-        >
-          <AddCircleIcon />
-        </Button>
-      </div>
-    </div>
+    <QuestionForm
+      idx={parseInt(state.questions.length) + 1}
+      question={question}
+      questionNumber={questionNumber}
+      image={image}
+      onChange={handleChange}
+      onSelect={handleImgSelect}
+      onDeselect={handleImgDeselect}
+      onSubmit={handleSubmit}
+    />
   );
 };
-export default QuestionForm;
+export default NewQuestion;
