@@ -2,6 +2,7 @@ import React, { useContext, useReducer, useState, useEffect } from "react";
 import { EditorContext } from "../../../context";
 import { Dialog, DialogContent, Backdrop } from "@material-ui/core";
 import QuestionForm from "./QuestionForm";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 import css from "./EditQuestion.module.css";
 
 const EditQuestion = (props) => {
@@ -120,6 +121,7 @@ const EditQuestion = (props) => {
               onSelect={handleImgSelect}
               onDeselect={handleImgDeselect}
               onSubmit={handleSubmit}
+              submitBtnIcon={<CheckCircleIcon />}
             />
           </div>
         </DialogContent>

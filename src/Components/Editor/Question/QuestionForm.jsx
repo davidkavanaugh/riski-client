@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, TextField } from "@material-ui/core";
-import AddCircleIcon from "@material-ui/icons/AddCircle";
 import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import BlockIcon from "@material-ui/icons/Block";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,6 +16,7 @@ const QuestionForm = (props) => {
     onSelect,
     onDeselect,
     onSubmit,
+    submitBtnIcon
   } = props;
   const useStyles = makeStyles((theme) => styles(theme));
   const classes = useStyles();
@@ -88,7 +88,7 @@ const QuestionForm = (props) => {
           onClick={onSubmit}
           disabled={question ? false : true}
         >
-          <AddCircleIcon />
+          {submitBtnIcon}
         </Button>
       </div>
     </div>

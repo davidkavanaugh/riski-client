@@ -1,6 +1,7 @@
 import React, { useContext, useReducer, useEffect } from "react";
 import { EditorContext } from "../../../context";
 import QuestionForm from "./QuestionForm";
+import AddCircleIcon from "@material-ui/icons/AddCircle";
 
 const NewQuestion = () => {
   const { state, dispatch } = useContext(EditorContext);
@@ -97,6 +98,7 @@ const NewQuestion = () => {
       onSelect={handleImgSelect}
       onDeselect={handleImgDeselect}
       onSubmit={handleSubmit}
+      submitBtnIcon={<AddCircleIcon />}
     />
   );
 };
