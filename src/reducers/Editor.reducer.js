@@ -360,8 +360,10 @@ export const editorReducer = (state, action) => {
         ...state.questions.slice(action.questionIndex + 1),
       ];
 
+      let questionNumber = () => action.questionNumber < 1 ? 1 : action.questionNumber;
+
       questionsArrUpdateQuestion.splice(
-        action.questionNumber - 1,
+        questionNumber() - 1,
         0,
         questionToUpdate
       );
